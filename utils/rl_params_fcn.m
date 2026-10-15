@@ -53,6 +53,15 @@ function params = rl_params_fcn()
     params.m_dry   = m_dry;
     params.g_I     = [0;0;-g_0];    % inertial frame e göre yer çekimi ivme vektörü
     params.alpha_m = 1/(I_sp*g_0);  %itki = mdot*Isp*g_0 // mdot=alfa_m*itki
+        
+
+
+    %Constraintler ile ilgili tanımlamalar
+    params.w_stc_1= 100;    % kısıtın ceza katsayısı
+    params.theta_max = 90;  % [deg] tilt açısı max
+    params.gs_max = 90 - 35; %params.gs_max = 90 - 35;   % [deg] glideslope, YERDEN ölçülen açı (dikeyden 35°)
+    params.w_B_max = deg2rad(90);  %  [rad/s] max açısal hız
+
 
 
 end

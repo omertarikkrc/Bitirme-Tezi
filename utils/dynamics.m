@@ -41,9 +41,18 @@ function f = dynamics(x,u,params)
     tau_gyro=skew(w_B)*(J_B_m*w_B) ;% kendi etrafında dönmekten gelen tork terimi
 
 
-
+    %açısal ivmeleri ekledik 
     f(12:14)=J_B_inv_m*(tau_thrust+tau_aero-tau_gyro);
 
+    % --- normal kısıtlar ---
+    tilt_ang_cons_pre = params.w_stc_1*(sqrt(q(2)^2+q(3)^2+ 1e-8)-sqrt((1-cosd(params.theta_max))/2))
+    tilt_ang_cons     = max(0,tilt_ang_cons_pre)^2
+    ang_vel_cons_pre  = params.w_stc_1*(sqrt(w_B(1)^2+w_B(2)^2+w_B(3)^2+1e-8)-params.w_B_max)
+    ang_vel_cons      = max(0,ang_vel_cons_pre)^2
+    gs_cons_pre       = tand(params.gs_max)*sqrt(r_I(1)^2+r_I(2)^2+1e-8)-r_I(3)
+    gs_cons           = params.w_stc_1*max(0,gs_cons_pre)^2
+    % 
+    f(15) = tilt_ang_cons+ang_vel_cons+gs_cons
 
 
 end
