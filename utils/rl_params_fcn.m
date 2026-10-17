@@ -8,7 +8,12 @@ function params = rl_params_fcn()
     
     n_x=15;
     n_u=5;
+    %%
 
+    t_f   = 21;             % uçuş süresi için ilk tahmin [s]
+    K     = 15;             % düğüm sayısı
+    t_scp = t_f/(K-1);      % düğümler arası süre, ilk tahmin [s]
+%%
 
     
     r_I_init   = [200, 200, 500]';     % [m]     3x1
@@ -131,6 +136,14 @@ function params = rl_params_fcn()
     params.T_min_aft   = 2200000*0.4;       % son yaklaşma alt sınırı [N]   (makale: T_min^stc1)
     params.alpha_T_min = 1.02;              % güvenlik payı -> 2.6928 MN
 
+
+    %% ölçekleme ve başlangıç koşılları
+    params.t_f      = t_f;
+    params.K        = K;
+    params.t_scp    = t_scp;
+    params.time_dil = true;                 % her aralığın süresi ayrı değişken (sigma)
+    params.r_scale  = norm(r_I_init);       % uzunluk birimi [m] başlangıç noktasının mesafesi
+    params.m_scale  = m_wet;                % kütle birimi [kg] yakıtlı kütle miktarı.
 
 
 end
