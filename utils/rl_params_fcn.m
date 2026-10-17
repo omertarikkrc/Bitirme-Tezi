@@ -63,6 +63,75 @@ function params = rl_params_fcn()
     params.w_B_max = deg2rad(90);  %  [rad/s] max açısal hız
 
 
+    %irtifa tetik 100 metre
+    % [m] h1_trig (Tablo 3): kuralların devreye girdiği irtifa
+   
+    params.alt_stc_trig = 100; 
+
+
+    % hız/açısal hız STC'leri 1.1*100 = 110 m'de tetiklenir (makalede 100 m)
+    params.alpha_alt_stc_trig = 1.1; 
+
+    %2 metrenin üstünde miyim tetiği 
+    %glidescope kısıtı düşük irtifada sıkıntı çıkartıyor.
+    params.alt_stc_trig_los_gs_done = 2.0;
+
+
+
+    % [deg] delta_stc, Tablo 3 (birimi orada yanlışlıkla deg/s yazılmış anlamadık)
+    params.delta_stc_cons = 1.0;    
+
+
+
+    %% stc 
+    params.w_stc_2              = 1000;   % ceza ağırlığı
+    params.theta_stc_cons       = 5.0;    % [deg] theta_stc, Tablo 3
+    params.alpha_theta_stc_cons = 0.92;   % güvenlik payı: sınır 0.92*5 = 4.6 deg
+
+    %Glideslope 
+    params.alpha_gs_stc_cons =0.92; % marj
+    params.gs_stc_cons=90 - 5; % derece
+
+
+    %angular velo stc
+    params.omega_stc_cons = 2.5;
+    params.alpha_omega_stc_cons = 0.99;
+
+
+
+    %hız velo 
+    params.spd_stc_cons = 20.0;
+    params.alpha_spd_stc_cons = 0.95;
+    params.w_stc_3 = 600;
+    
+
+
+
+    %görüş hattı
+    % görüş konisi yarı açısı [deg] (makale: psi_stc)
+    params.los_stc_cons       = 5; 
+    % güvenlik payı -> 4.9 deg
+    params.alpha_los_stc_cons = 0.98;   
+
+    params.alt_stc_trig_los           = 200;   % LOS tetik irtifası [m] (makale: h2_trig)
+    params.alpha_alt_alt_stc_trig_los = 1.1;   % güvenlik payı -> 220 m
+
+
+%% Hız ve Eğim trigger
+%roket yavaş VE dik ise itki dar bir aralıkta olsun
+%hızlı VEYA eğik ise itki normal bir aralıkta olsun
+
+    params.spd_stc_trig   = 35.0;   % hız tetiği [m/s] (makale: v_I^trig)
+    params.theta_stc_trig = 60;     % eğim tetiği [deg] (makale: theta^trig)
+
+
+    params.T_max       = 2200000*3.0;       % normal aralık üst sınırı [N]  (makale: T_max^stc2)
+    params.T_min       = 2200000*0.4*3.0;   % normal aralık alt sınırı [N]  (makale: T_min^stc2)
+    params.T_max_aft   = 2200000;           % son yaklaşma üst sınırı [N]   (makale: T_max^stc1)
+    params.T_min_aft   = 2200000*0.4;       % son yaklaşma alt sınırı [N]   (makale: T_min^stc1)
+    params.alpha_T_min = 1.02;              % güvenlik payı -> 2.6928 MN
+
+
 
 end
 
