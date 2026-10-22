@@ -146,5 +146,13 @@ function params = rl_params_fcn()
     params.m_scale  = m_wet;                % kütle birimi [kg] yakıtlı kütle miktarı.
 
 
+    %%RK 4 parametresi 
+    %zero order hold (merdiveb) ya da 1st order hold (rampa)
+    params.inp_param = 'FOH';       % düğümler arası nasıl ilerleyecek onu belirleyen parametre
+
+    params.free_final_time = true;   % uçuş süresi serbest (optimizasyon belirler)
+    params.rk4_steps_dyn   = 20;     % her aralıkta RK4 NOKTA sayısı (19 adım)
+
+
 end
 
