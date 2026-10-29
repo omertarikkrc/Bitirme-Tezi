@@ -8,7 +8,7 @@ function params = rl_params_fcn()
     
     n_x=15;
     n_u=5;
-    %%
+    %% Düğüm noktaları ile ilgili parametreler
 
     t_f   = 21;             % uçuş süresi için ilk tahmin [s]
     K     = 15;             % düğüm sayısı
@@ -154,5 +154,16 @@ function params = rl_params_fcn()
     params.rk4_steps_dyn   = 20;     % her aralıkta RK4 NOKTA sayısı (19 adım)
 
 
+    %% --- V vektörü vagon sınırları (Python ile aynı değerler, 0-tabanlı) ---
+params.i0 = 0;
+params.i1 = params.n_x;                           % 15   x bitti
+params.i2 = params.i1 + params.n_x*params.n_x;    % 240  Phi bitti
+params.i3 = params.i2 + params.n_x*params.n_u;    % 315  Bm bitti
+params.i4 = params.i3 + params.n_x*params.n_u;    % 390  Bp bitti
+params.i5 = params.i4 + params.n_x;               % 405  S bitti
+params.i6 = params.i5 + params.n_x;               % 420  z bitti
+
+
+params.rk4_steps_J = 20;
 end
 

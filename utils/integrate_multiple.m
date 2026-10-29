@@ -1,5 +1,5 @@
 function x_next = integrate_multiple(X, U, sigma, params)
-% INTEGRATE_MULTIPLE  Çok atış: her aralığı kendi düğümünden RK4 ile integre eder (Python hücre 17)
+% INTEGRATE_MULTIPLE  Çok atış: her aralığı kendi düğümünden RK4 ile integre eder
 %   X      : n_x x K       düğümlerdeki durumlar
 %   U      : n_u x K       düğümlerdeki kontroller
 %   sigma  : 1 x (K-1)     aralık süreleri (time_dil açıkken)
