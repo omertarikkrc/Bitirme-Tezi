@@ -22,7 +22,17 @@ function f = dynamics(x,u,params)
     CBI = CBI_fcn(q);                 % yer -> roket
     CIB = transpose(CBI) ;            % roket -> yer
 
-   f = zeros(params.n_x, 1);          % params.nx = 15 parametre sayısı 
+
+    %%casadi e göre değiştirdik tanımlamayı 
+
+    if isa(x, 'casadi.SX')
+        f = casadi.SX.zeros(params.n_x, 1);   % sembolik çağrı (Jacobian için) casadi 
+    else
+        f = zeros(params.n_x, 1);             % sayısal çağrı (eskisi gibi)  eski hali 
+    end
+
+
+
    f(1)=-params.alpha_m*T;            % kütle değişimi
    f(2:4)= v_I;                       % konumun değişimi yani hız.
 
