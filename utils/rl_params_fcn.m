@@ -165,5 +165,24 @@ params.i6 = params.i5 + params.n_x;               % 420  z bitti
 
 
 params.rk4_steps_J = 20;
+
+    %% --- 8. adım: maliyet ve kısıtlar ---
+    % maliyet
+    params.cost_type = 'time';    % 'time' (orijinal) | 'fuel' | 'mixed'
+    params.w_sigma   = 150;       % süre maliyetinin ağırlığı
+    params.w_m       = 150;       % yakıt maliyetinin ağırlığı (sadece 'fuel'/'mixed' deneyleri için)
+
+    % prox-linear cezaları
+    params.w_con_dyn = 1e4;       % hayali itici (nu) cezası
+    params.w_ptr     = 2^12;      % tasma ağırlığının başlangıç değeri (w_tr = 4096)
+    params.w_ds      = 20;        % tasmada sigma değişimine ek ağırlık
+
+    % kısıtlar
+    params.beta_ctcs           = 1e-4;        % CTCS: bir aralıkta y en fazla bu kadar artabilir
+    params.delta_engine_max    = 10;          % [deg] gimbal açısı sınırı
+    params.delta_boresight_max = 20;          % [deg] kamera açısı sınırı
+    params.add_minmax_sig      = true;        % aralık sürelerine alt/üst sınır koy
+    params.min_sigma           = t_scp*0.5;   % [s] 0.75 s
+    params.max_sigma           = t_scp*10;    % [s] 15 s
 end
 
